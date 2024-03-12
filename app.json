@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "appImob",
+    "slug": "appImob",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
