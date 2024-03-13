@@ -18,7 +18,7 @@ export const Logo = styled.Image`
 `;
 
 export const Form = styled.View`
-  margin-bottom: 48px;
+  margin-bottom: ${RFValue(64)}px;
 `;
 
 export const InputWrapper = styled.View`

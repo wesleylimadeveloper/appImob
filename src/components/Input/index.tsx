@@ -22,6 +22,7 @@ const InputForwardRef = forwardRef<TextInput, InputProps>(function Input(
   { editable = true, searchable, secureTextEntry, error, ...rest },
   ref
 ) {
+  const [isFocused, setIsFocused] = useState(false);
   const [passwordHidden, setPasswordHidden] = useState(secureTextEntry);
 
   return (
@@ -30,7 +31,11 @@ const InputForwardRef = forwardRef<TextInput, InputProps>(function Input(
         style={[
           styles.input,
           {
-            borderColor: editable ? THEME.colors.gray_dark : THEME.colors.gray,
+            borderColor: editable
+              ? isFocused
+                ? THEME.colors.primary
+                : THEME.colors.gray_dark
+              : THEME.colors.gray,
           },
         ]}
       >
@@ -50,6 +55,8 @@ const InputForwardRef = forwardRef<TextInput, InputProps>(function Input(
             },
           ]}
           editable={editable}
+          onBlur={() => setIsFocused(false)}
+          onFocus={() => setIsFocused(true)}
           placeholderTextColor={
             editable ? THEME.colors.gray_dark : THEME.colors.gray
           }

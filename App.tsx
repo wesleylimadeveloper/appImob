@@ -7,7 +7,7 @@ import {
 } from "@expo-google-fonts/roboto";
 import { ThemeProvider } from "styled-components";
 
-import { Login } from "./src/screens/Login";
+import { Routes } from "./src/routes";
 
 import THEME from "./src/global/styles/theme";
 
@@ -27,7 +27,7 @@ export default function App() {
         backgroundColor={THEME.colors.primary}
         barStyle="light-content"
       />
-      <Login />
+      <Routes />
     </ThemeProvider>
   );
 }
