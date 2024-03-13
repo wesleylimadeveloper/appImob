@@ -1,5 +1,6 @@
 import React from "react";
 import { StatusBar } from "react-native";
+import * as NavigationBar from "expo-navigation-bar";
 import {
   useFonts,
   Roboto_400Regular,
@@ -20,6 +21,8 @@ export default function App() {
   if (!fontsLoaded && !fontError) {
     return null;
   }
+
+  NavigationBar.setBackgroundColorAsync(THEME.colors.primary);
 
   return (
     <ThemeProvider theme={THEME}>
