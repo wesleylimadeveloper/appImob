@@ -14,7 +14,7 @@ export function Auth() {
         headerStyle: {
           backgroundColor: THEME.colors.primary,
         },
-        headerTintColor: THEME.colors.gray_light,
+        headerTintColor: THEME.colors.light,
         headerTitleAlign: "center",
         headerTitleStyle: {
           fontFamily: THEME.fonts.title,

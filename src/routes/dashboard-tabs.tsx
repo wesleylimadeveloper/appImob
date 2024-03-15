@@ -5,7 +5,7 @@ import { useTheme } from "styled-components/native";
 import { Dashboard } from "../screens/Dashboard";
 import { Profile } from "../screens/Profile";
 
-export function Tabs() {
+export function DashboardTabs() {
   const THEME = useTheme();
 
   const { Navigator, Screen } = createBottomTabNavigator();

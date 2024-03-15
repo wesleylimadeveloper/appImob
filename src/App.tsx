@@ -8,9 +8,9 @@ import {
 } from "@expo-google-fonts/roboto";
 import { ThemeProvider } from "styled-components";
 
-import { Routes } from "./src/routes";
+import { Routes } from "./routes";
 
-import THEME from "./src/global/styles/theme";
+import THEME from "./global/styles/theme";
 
 export default function App() {
   let [fontsLoaded, fontError] = useFonts({

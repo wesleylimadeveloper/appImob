@@ -4,7 +4,7 @@ import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
 import { CustomDrawer } from "../components/CustomDrawer";
 
-import { Tabs } from "./tabs";
+import { DashboardTabs } from "./dashboard-tabs";
 import { Support } from "../screens/Support";
 
 export function Dashboard() {
@@ -42,8 +42,8 @@ export function Dashboard() {
       }}
     >
       <Screen
-        component={Tabs}
-        name="Tabs"
+        component={DashboardTabs}
+        name="DashboardTabs"
         options={{
           drawerIcon: ({ color, size }) => (
             <Ionicons name="pie-chart" color={color} size={size} />
