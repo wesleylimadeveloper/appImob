@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import MaskInput, { MaskInputProps } from "react-native-mask-input";
 
 import THEME from "../../global/styles/theme";
@@ -70,16 +70,16 @@ const InputForwardRef = forwardRef<TextInput, InputProps>(function Input(
             activeOpacity={0.5}
             onPress={() => setPasswordHidden(!passwordHidden)}
           >
-            <Ionicons
+            <MaterialCommunityIcons
               style={styles.eyeIcon}
-              name={passwordHidden ? "eye-off-outline" : "eye-outline"}
+              name={passwordHidden ? "eye-off" : "eye"}
               size={24}
               color={editable ? THEME.colors.dark_dark : THEME.colors.gray}
             />
           </TouchableOpacity>
         )}
       </View>
-      {error && <Text style={styles.errorText}>{error}.</Text>}
+      {error && <Text style={styles.errorText}>{error}</Text>}
     </>
   );
 });

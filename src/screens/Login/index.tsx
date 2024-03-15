@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import { KeyboardAvoidingView, TextInput } from "react-native";
-import { useTheme } from "styled-components/native";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 import Input from "../../components/Input";
 import { PrimaryButton } from "../../components/Buttons/PrimaryButton";
@@ -17,15 +19,34 @@ import {
 } from "./styles";
 
 export function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [isLogginIn, setIsLoggingIn] = useState(false);
-
-  const theme = useTheme();
 
   const passwordInputRef = useRef<TextInput>();
 
-  async function handleLogin(formData: FormData) {}
+  const schema = yup.object().shape({
+    email: yup
+      .string()
+      .trim()
+      .required("E-mail obrigatório.")
+      .email("E-mail inválido."),
+    password: yup.string().trim().required("Senha obrigatória."),
+  });
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  async function handleLogin(formData: FormData) {
+    setIsLoggingIn(true);
+
+    setTimeout(() => {
+      setIsLoggingIn(false);
+    }, 2000);
+  }
 
   return (
     <Scroll
@@ -38,32 +59,52 @@ export function Login() {
           <Logo source={require("../../assets/logo.png")} resizeMode="center" />
           <Form>
             <InputWrapper>
-              <Input
-                autoCapitalize="none"
-                autoCorrect={false}
-                editable={!isLogginIn}
-                onChangeText={setEmail}
-                onSubmitEditing={() => passwordInputRef.current.focus()}
-                placeholder="E-mail"
-                value={email}
+              <Controller
+                name="email"
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <>
+                    <Input
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      editable={!isLogginIn}
+                      error={errors?.email?.message}
+                      onChangeText={onChange}
+                      onSubmitEditing={() => passwordInputRef.current.focus()}
+                      placeholder="E-mail"
+                      value={value}
+                    />
+                  </>
+                )}
               />
             </InputWrapper>
             <InputWrapper>
-              <Input
-                autoCapitalize="none"
-                autoCorrect={false}
-                editable={!isLogginIn}
-                onChangeText={setPassword}
-                placeholder="Senha"
-                secureTextEntry
-                ref={passwordInputRef}
-                value={password}
+              <Controller
+                name="password"
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <>
+                    <Input
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      editable={!isLogginIn}
+                      error={errors?.password?.message}
+                      onChangeText={onChange}
+                      onSubmitEditing={handleSubmit(handleLogin)}
+                      placeholder="Senha"
+                      secureTextEntry
+                      ref={passwordInputRef}
+                      value={value}
+                    />
+                  </>
+                )}
               />
             </InputWrapper>
             <PrimaryButton
               title="Entrar"
               disabled={isLogginIn}
               inactive={isLogginIn}
+              onPress={handleSubmit(handleLogin)}
             />
 
             <LinkButtonWrapper>
