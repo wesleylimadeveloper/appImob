@@ -19,7 +19,7 @@ export function DashboardTabs() {
         tabBarInactiveTintColor: "#93CBC0",
         tabBarLabelStyle: {
           fontFamily: THEME.fonts.text,
-          fontSize: THEME.fontSize.normal,
+          fontSize: THEME.fontSize.smaller,
           marginBottom: 2,
         },
         tabBarStyle: {

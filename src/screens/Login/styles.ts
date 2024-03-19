@@ -28,5 +28,5 @@ export const InputWrapper = styled.View`
 export const LinkButtonWrapper = styled.View`
   align-self: center;
   margin-top: 16px;
-  width: 40%;
+  width: 60%;
 `;
