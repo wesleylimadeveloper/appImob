@@ -10,6 +10,10 @@ export function Loading() {
 
   useEffect(() => {
     NavigationBar.setVisibilityAsync("hidden");
+
+    return () => {
+      NavigationBar.setVisibilityAsync("visible");
+    };
   }, []);
 
   return (
