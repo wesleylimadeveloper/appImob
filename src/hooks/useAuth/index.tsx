@@ -87,6 +87,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function logout() {
     await AsyncStorage.removeItem(authTokenStorageKey);
+    await AsyncStorage.removeItem(userDataStorageKey);
     setUserData({} as UserData);
   }
 
