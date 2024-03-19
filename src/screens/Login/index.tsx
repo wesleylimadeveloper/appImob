@@ -1,12 +1,16 @@
 import React, { useRef, useState } from "react";
 import { KeyboardAvoidingView, TextInput } from "react-native";
+import { useTheme } from "styled-components/native";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Toast } from "react-native-toast-notifications";
 
 import Input from "../../components/Input";
 import { PrimaryButton } from "../../components/Buttons/PrimaryButton";
 import { LinkButton } from "../../components/Buttons/LinkButton";
+
+import { useAuth } from "../../hooks/useAuth";
 
 import { FormData, LoginNavigationProps } from "./types";
 import {
@@ -22,6 +26,10 @@ export function Login() {
   const [isLogginIn, setIsLoggingIn] = useState(false);
 
   const passwordInputRef = useRef<TextInput>();
+
+  const THEME = useTheme();
+
+  const { login } = useAuth();
 
   const schema = yup.object().shape({
     email: yup
@@ -43,9 +51,17 @@ export function Login() {
   async function handleLogin(formData: FormData) {
     setIsLoggingIn(true);
 
-    setTimeout(() => {
+    try {
+      await login(formData);
+    } catch (error) {
       setIsLoggingIn(false);
-    }, 2000);
+      Toast.show(
+        "Erro ao tentar fazer login. Por favor, verifique sua conexão ou tente novamente mais tarde.",
+        {
+          normalColor: THEME.colors.warning,
+        }
+      );
+    }
   }
 
   return (
@@ -69,6 +85,7 @@ export function Login() {
                       autoCorrect={false}
                       editable={!isLogginIn}
                       error={errors?.email?.message}
+                      keyboardType="email-address"
                       onChangeText={onChange}
                       onSubmitEditing={() => passwordInputRef.current.focus()}
                       placeholder="E-mail"

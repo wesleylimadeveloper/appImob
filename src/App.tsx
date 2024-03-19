@@ -7,6 +7,10 @@ import {
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
 import { ThemeProvider } from "styled-components";
+import { ToastProvider } from "react-native-toast-notifications";
+import { RFValue } from "react-native-responsive-fontsize";
+
+import { AuthProvider } from "./hooks/useAuth";
 
 import { Routes } from "./routes";
 
@@ -26,11 +30,27 @@ export default function App() {
 
   return (
     <ThemeProvider theme={THEME}>
-      <StatusBar
-        backgroundColor={THEME.colors.primary}
-        barStyle="light-content"
-      />
-      <Routes />
+      <ToastProvider
+        animationDuration={100}
+        duration={3500}
+        placement="top"
+        textStyle={{
+          fontSize: RFValue(12),
+          fontFamily: THEME.fonts.title,
+          textAlign: "center",
+        }}
+        dangerColor={THEME.colors.danger}
+        successColor={THEME.colors.success}
+        warningColor={THEME.colors.warning}
+      >
+        <AuthProvider>
+          <StatusBar
+            backgroundColor={THEME.colors.primary}
+            barStyle="light-content"
+          />
+          <Routes />
+        </AuthProvider>
+      </ToastProvider>
     </ThemeProvider>
   );
 }
