@@ -7,11 +7,11 @@ const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
-    const userStorage = await AsyncStorage.getItem("@appImob:auth_token");
+    const authTokenStorage = await AsyncStorage.getItem("@appImob:auth_token");
 
-    if (userStorage) {
-      const user = JSON.parse(userStorage);
-      config.headers.Authorization = `Bearer ${user.token}`;
+    if (authTokenStorage) {
+      const token = JSON.parse(authTokenStorage);
+      config.headers.Authorization = `Bearer ${token}`;
     }
 
     return config;
