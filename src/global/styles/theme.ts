@@ -26,7 +26,7 @@ export default {
     smallest: RFValue(11),
     smaller: RFValue(12),
     normal: RFValue(14),
-    larger: RFValue(18),
-    largest: RFValue(22),
+    larger: RFValue(16),
+    largest: RFValue(18),
   },
 };
