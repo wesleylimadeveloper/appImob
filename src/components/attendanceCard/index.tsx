@@ -192,7 +192,7 @@ export function AttendanceCard({
 
       <Footer>
         <Text>{calculateElapsedTime(new Date(historicoDataDeCadastro))}</Text>
-        {historicoResponsavelNome && <Text>{historicoResponsavelNome}</Text>}
+        {historicoResponsavelNome && <Title>{historicoResponsavelNome}</Title>}
       </Footer>
     </Container>
   );

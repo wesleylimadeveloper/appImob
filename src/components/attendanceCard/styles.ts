@@ -8,13 +8,12 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-  margin-bottom: 6px;
+  margin-bottom: 2px;
 `;
 
 export const ID = styled.Text`
   font-family: ${({ theme }) => theme.fonts.title};
   font-size: ${({ theme }) => theme.fontSize.larger}px;
-  margin-bottom: 8px;
 `;
 
 export const Temperature = styled.View`
@@ -56,7 +55,7 @@ export const DateInfo = styled.View`
   flex-direction: row;
   gap: 6px;
   justify-content: center;
-  margin: 6px 0;
+  margin: 6px 0 0 0;
 `;
 
 export const SaleInfo = styled.Text`
@@ -79,7 +78,7 @@ export const Involved = styled.View`
   flex-wrap: wrap;
   gap: 2px;
   justify-content: flex-end;
-  margin-top: 6px;
+  margin-top: 2px;
   padding: 8px;
 `;
 
@@ -108,7 +107,7 @@ export const ContactMessage = styled.Text`
   color: ${({ theme }) => theme.colors.danger};
   font-family: ${({ theme }) => theme.fonts.text};
   font-size: ${({ theme }) => theme.fontSize.normal}px;
-  margin-top: 6px;
+  margin-top: 4px;
   text-align: center;
 `;
 
@@ -129,5 +128,5 @@ export const DescriptionHistory = styled.Text`
 
 export const Footer = styled.View`
   align-items: flex-end;
-  margin-top: 6px;
+  margin-top: 4px;
 `;
