@@ -9,9 +9,8 @@ export const Container = styled.TouchableOpacity<FilterButtonStyleProps>`
   border-color: ${({ color }) => color};
   border-radius: 8px;
   border-width: 1px;
-  height: 100%;
   justify-content: center;
-  padding: 12px 24px;
+  padding: 0 36px;
 `;
 
 export const Text = styled.Text<FilterButtonStyleProps>`

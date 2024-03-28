@@ -9,16 +9,16 @@ export const Container = styled.View`
 export const Header = styled.View`
   align-items: center;
   flex-direction: row;
-  padding: ${RFValue(32)}px ${RFValue(16)}px;
+  padding: ${RFValue(16)}px;
 `;
 
 export const Avatar = styled.View`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.secondary};
   border-radius: 256px;
-  height: ${RFValue(64)}px;
+  height: ${RFValue(54)}px;
   justify-content: center;
-  width: ${RFValue(64)}px;
+  width: ${RFValue(54)}px;
 `;
 
 export const InitialLetter = styled.Text`

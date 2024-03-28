@@ -1,6 +1,6 @@
 import { FlatList } from "react-native";
 import styled from "styled-components/native";
-import { RFValue } from "react-native-responsive-fontsize";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 import { ListInfoProps, ListTitleProps } from "./types";
 
@@ -18,8 +18,8 @@ export const Filters = styled.FlatList.attrs({
   horizontal: true,
   showsHorizontalScrollIndicator: false,
 })`
-  max-height: ${RFValue(64)}px;
-  min-height: ${RFValue(64)}px;
+  max-height: ${RFPercentage(10)}px;
+  min-height: ${RFPercentage(10)}px;
 ` as typeof FlatList;
 
 export const ListInfo = styled.View<ListInfoProps>`
@@ -28,7 +28,7 @@ export const ListInfo = styled.View<ListInfoProps>`
   border-radius: 8px;
   border-top-width: 8px;
   border-width: 2px;
-  margin: 16px;
+  margin: 8px 16px;
   padding: 8px 16px;
 `;
 

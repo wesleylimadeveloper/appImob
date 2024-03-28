@@ -49,7 +49,11 @@ export function Support() {
       const response = await getAttendances(Pessoa_Id, filterSelected.id);
       const data: GetAttendancesResponse[] = response.data.data;
 
-      setAttendances(data);
+      const dataSorteredByID = data
+        .sort((a, b) => a.atendimentoId - b.atendimentoId)
+        .reverse();
+
+      setAttendances(dataSorteredByID);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
