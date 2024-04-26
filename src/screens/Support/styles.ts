@@ -1,6 +1,6 @@
 import { FlatList } from "react-native";
 import styled from "styled-components/native";
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 import { ListInfoProps, ListTitleProps } from "./types";
 
@@ -38,6 +38,13 @@ export const ListTitle = styled.Text<ListTitleProps>`
   font-family: ${({ theme }) => theme.fonts.title};
   font-size: ${({ theme }) => theme.fontSize.larger}px;
   margin-bottom: 6px;
+`;
+
+export const SaleInfo = styled.Text`
+  color: ${({ theme }) => theme.colors.secondary};
+  font-family: ${({ theme }) => theme.fonts.title};
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
+  text-align: right;
 `;
 
 export const List = styled.FlatList.attrs({

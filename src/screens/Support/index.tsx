@@ -16,6 +16,7 @@ import {
 } from "../../services/atendimento/types";
 
 import { FILTERS } from "../../utils/filters";
+import { valueFormat } from "../../utils/valueFormat";
 
 import { filterSelectedTypes } from "./types";
 import {
@@ -23,6 +24,7 @@ import {
   Filters,
   ListInfo,
   ListTitle,
+  SaleInfo,
   List,
   Divider,
   ListEmptyMessage,
@@ -34,6 +36,7 @@ export function Support() {
     FILTERS[0]
   );
   const [attendanceQuantity, setAttendanceQuantity] = useState(0);
+  const [totalSaleValue, setTotalSaleValue] = useState(0);
   const [attendances, setAttendances] = useState<GetAttendancesResponse[]>([]);
 
   const { userData } = useAuth();
@@ -42,6 +45,15 @@ export function Support() {
   function handleSelectFilter(item: filterSelectedTypes) {
     setIsLoading(true);
     setFilterSelected(item);
+  }
+
+  function calculateTotalSaleValue(data: GetAttendancesResponse[]) {
+    const totalValue = data.reduce(
+      (acumulator, attendance) => acumulator + attendance.valorDeVenda,
+      0
+    );
+
+    setTotalSaleValue(totalValue);
   }
 
   async function getAttendancesByPerson() {
@@ -54,6 +66,7 @@ export function Support() {
         .reverse();
 
       setAttendances(dataSorteredByID);
+      calculateTotalSaleValue(data);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -78,6 +91,7 @@ export function Support() {
         await getAttendancesByPerson();
       } else {
         setAttendances([]);
+        setTotalSaleValue(0);
         setIsLoading(false);
       }
     } catch (error) {
@@ -97,6 +111,7 @@ export function Support() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <FilterButton
+            disabled={item.id === filterSelected.id}
             onPress={() => handleSelectFilter(item)}
             isSelected={item.id === filterSelected.id}
             {...item}
@@ -113,6 +128,10 @@ export function Support() {
               {filterSelected.description} ({attendanceQuantity} /{" "}
               {attendanceQuantity})
             </ListTitle>
+
+            {totalSaleValue > 0 && filterSelected.id !== "9" && (
+              <SaleInfo>VGF Potencial - {valueFormat(totalSaleValue)}</SaleInfo>
+            )}
           </ListInfo>
 
           <List
@@ -122,7 +141,7 @@ export function Support() {
             ListEmptyComponent={() => (
               <ListEmptyMessage>
                 No momento, não há registros de atendimentos para esse filtro de
-                pesquisa.
+                pesquisa
               </ListEmptyMessage>
             )}
             renderItem={({ item }) => <AttendanceCard {...item} />}
