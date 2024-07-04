@@ -8,6 +8,7 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
+  gap: 2px;
   margin-bottom: 2px;
 `;
 
@@ -27,7 +28,6 @@ export const ContactInfo = styled.View`
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  margin: 2px 0;
 `;
 
 export const CallButton = styled.TouchableOpacity.attrs({

@@ -12,7 +12,9 @@ export type FormData = {
 
 export type IAuthContextData = {
   userData: UserData;
-  isAppLoading: boolean;
+  authTokenStorageKey: string;
+  userDataStorageKey: string;
+  setUser(user: UserData): void;
   login(form: FormData): Promise<AxiosResponse<any, any>>;
   logout(): Promise<void>;
 };

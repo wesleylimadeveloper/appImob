@@ -1,4 +1,6 @@
+import { Alert } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import {
   DrawerContentScrollView,
   DrawerContentComponentProps,
@@ -12,9 +14,32 @@ import { useAuth } from "../../hooks/useAuth";
 import { Container, Header, Logo } from "./styles";
 
 export function CustomDrawer(props: DrawerContentComponentProps) {
+  const navigation = useNavigation();
   const THEME = useTheme();
 
   const { logout } = useAuth();
+
+  async function handleConfirmLogout() {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Auth" as never }],
+    });
+
+    await logout();
+  }
+
+  async function handleLogout() {
+    Alert.alert("Sair", "Sair da sua conta?", [
+      {
+        text: "Não",
+        style: "cancel",
+      },
+      {
+        text: "Sim",
+        onPress: async () => await handleConfirmLogout(),
+      },
+    ]);
+  }
 
   return (
     <Container>
@@ -41,7 +66,7 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
             color: THEME.colors.danger,
             fontFamily: THEME.fonts.text,
           }}
-          onPress={logout}
+          onPress={handleLogout}
         />
       </DrawerContentScrollView>
     </Container>

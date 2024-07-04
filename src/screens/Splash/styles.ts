@@ -1,7 +1,11 @@
 import styled from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 
-export const Scroll = styled.ScrollView``;
+export const Scroll = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    minHeight: "100%",
+  },
+})``;
 
 export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.light};

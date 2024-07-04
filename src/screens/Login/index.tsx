@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { KeyboardAvoidingView, TextInput } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,7 +13,7 @@ import { LinkButton } from "../../components/Buttons/LinkButton";
 
 import { useAuth } from "../../hooks/useAuth";
 
-import { FormData, LoginNavigationProps } from "./types";
+import { FormData } from "./types";
 import {
   Scroll,
   Container,
@@ -27,6 +28,7 @@ export function Login() {
 
   const passwordInputRef = useRef<TextInput>();
 
+  const navigation = useNavigation();
   const THEME = useTheme();
 
   const { login } = useAuth();
@@ -53,10 +55,15 @@ export function Login() {
 
     try {
       await login(formData);
+
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Dashboard" as never }],
+      });
     } catch (error) {
       setIsLoggingIn(false);
       Toast.show(
-        "Erro ao tentar fazer login. Por favor, verifique sua conexão ou tente novamente mais tarde.",
+        "Erro ao tentar fazer login. Por favor, verifique suas credenciais ou conexão e tente novamente.",
         {
           normalColor: THEME.colors.warning,
         }
@@ -65,11 +72,7 @@ export function Login() {
   }
 
   return (
-    <Scroll
-      contentContainerStyle={{
-        minHeight: "100%",
-      }}
-    >
+    <Scroll>
       <Container>
         <KeyboardAvoidingView behavior="position">
           <Logo source={require("../../assets/logo.png")} resizeMode="center" />

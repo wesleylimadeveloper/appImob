@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import qs from "qs";
 
@@ -16,21 +16,12 @@ const AuthContext = createContext({} as IAuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [userData, setUserData] = useState<UserData>({} as UserData);
-  const [isAppLoading, setIsAppLoading] = useState(true);
 
   const authTokenStorageKey = "@appImob:auth_token";
   const userDataStorageKey = "@appImob:user_data";
 
-  async function loadScreen() {
-    const authToken = await AsyncStorage.getItem(authTokenStorageKey);
-
-    if (authToken) {
-      const user = await AsyncStorage.getItem(userDataStorageKey);
-
-      if (user) setUserData(JSON.parse(user));
-    }
-
-    setIsAppLoading(false);
+  function setUser(user: UserData) {
+    setUserData(user);
   }
 
   async function login(form: FormData) {
@@ -86,20 +77,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   async function logout() {
-    await AsyncStorage.removeItem(authTokenStorageKey);
-    await AsyncStorage.removeItem(userDataStorageKey);
+    await AsyncStorage.clear();
     setUserData({} as UserData);
   }
-
-  useEffect(() => {
-    loadScreen();
-  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         userData,
-        isAppLoading,
+        authTokenStorageKey,
+        userDataStorageKey,
+        setUser,
         login,
         logout,
       }}
